@@ -1,5 +1,7 @@
 // Kaden Emrich
 
+var totalClicks = 0;
+
 var clicks = 0;
 
 /* Objects Start */
@@ -8,6 +10,9 @@ var counter = document.getElementById("counter");
 
 var upgradeDiv = document.getElementById("upgrades");
 var upgradeEnd = document.getElementById("endUpgrades");
+var upgrades = [];
+
+var ticker;
 
 var clicker = {
 
@@ -69,7 +74,7 @@ class upgrade {
         this.button.className = "upgrade";
         this.button.type = "button";
         this.button.innerHTML = "BUY";
-        this.button.onclick = this.buy;
+        //this.button.addEventListener("click", this.buy);
         this.div.appendChild(this.button);
 
         // create cost element
@@ -89,12 +94,26 @@ class upgrade {
 
     buy() {
 
-        this.amount++;
-        this.cost *= 1.1;
+        if(clicks >= this.cost) {
 
-        this.costEl.innerHTML = this.cost;
-        this.amountEl.innerHTML = this.amount;
+            clicks -= this.cost;
 
+            this.amount++;
+            this.cost = Math.round(this.cost * 1.1);
+
+            this.costEl.innerHTML = "Cost: " + this.cost;
+            this.amountEl.innerHTML = "(" + this.amount + ")";
+
+            update();
+
+            console.log("buying a " + this.name + ".");
+        }
+    }
+
+    tick() {
+
+        clicks += this.amount * this.cps;
+        
     }
 }
 
@@ -105,6 +124,22 @@ function clickit() {
 
     clicker.activate();
     clicks++;
+    totalClicks++;
+
+    if(clicks >= 10 && upgrades.length == 0) {
+
+        var newUpgrade = new upgrade("Broken Mouse", 20, 0.25);
+        newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
+        upgrades.push(newUpgrade);
+
+    }
+    if(clicks >= 100 && upgrades.length == 1) {
+
+        var newUpgrade = new upgrade("The World's Worst Auto-Clicker", 100, 1);
+        newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
+        upgrades.push(newUpgrade);
+
+    }
 
     update();
 
@@ -113,4 +148,19 @@ function clickit() {
 function update() {
 
     counter.innerHTML = clicks;
+
 }
+
+function tick() {
+
+    if(upgrades != null) {
+        for(let i = 0; i < upgrades.length; i++) {
+
+            upgrades[i].tick();
+        }
+    }
+
+    update();
+
+} 
+ticker = setInterval(tick, 1000);

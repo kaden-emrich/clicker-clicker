@@ -8,7 +8,7 @@ body {
     top: 0;
     left: 0;
     width: 1400px;
-    height: 800px;
+    height: 700px;
     border: 10px solid black;
 }
 
@@ -16,7 +16,7 @@ body {
     position: absolute;
     box-sizing: border-box;
     width: 400px;
-    height: 800px;
+    height: 700px;
     margin: 0;
     border: 1px solid gray;
 }
@@ -52,7 +52,7 @@ body {
     left: 910px;
     box-sizing: border-box;
     width: 500px;
-    height: 800px;
+    height: 700px;
     margin: 0;
     border: 1px solid gray;
 }
