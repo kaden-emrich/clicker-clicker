@@ -157,7 +157,7 @@ function update() {
 
     if(clicks >= 10 && upgrades.length == 0) {
 
-        var newUpgrade = new upgrade("Broken Mouse", 20, 0.5, "broken-mouse.png");
+        var newUpgrade = new upgrade("Broken Mouse", 20, 0.5, "broken-mouse.PNG");
         newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
         upgrades.push(newUpgrade);
 
