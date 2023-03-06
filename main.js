@@ -285,11 +285,21 @@ function loadGame() {
     clickit();
 
     for(let i = 0; i < upgrades.length; i++) {
+        
+        if(getCookie(upgrades[i].name) != 0) {
+            while(upgrades[i] == null) {
+                clickit();
+            }
+        }
 
         upgrades[i].amount = parseInt(getCookie(upgrades[i].name));
         upgrades[i].update();
 
     }
+
+    clicks = parseInt(getCookie("clicks")) - 1;
+
+    clickit();
 
     update();
 }
