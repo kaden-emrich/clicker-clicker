@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Clicker Clicker v0.0.8</title>
+        <title>Clicker Clicker v0.1.0</title>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
@@ -21,6 +21,10 @@
                 <div id="stats">
                     <p class="count">Clicks: <span id="counter">0</span></p>
                     <p>CPS: <span id="CPS">0</span></p>
+                </div>
+                <div class="gameStateButton">
+                    <button type="button" class="gameStateButton" onclick="saveGame()">SAVE GAME</button>
+                    <button type="button" class="gameStateButton" onclick="loadGame()">LOAD GAME</button>
                 </div>
             </div>
 
