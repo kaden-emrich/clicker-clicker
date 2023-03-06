@@ -101,8 +101,8 @@ class upgrade {
 
     update() {
 
-        this.costEl.innerHTML = this.cost;
-        this.amountEl.innerHTML = this.amount;
+        this.costEl.innerHTML = "Cost: " + this.cost;
+        this.amountEl.innerHTML = "(" + this.amount + ")";
 
     }
 
@@ -253,12 +253,11 @@ function getCookie(cname) {
 
 function getAllCookies() {
 
-    let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
 
     return ca;
-}
+} // getAllCookies()
 
 /* Other Functions End */
 
@@ -281,11 +280,14 @@ function saveGame() {
 
 function loadGame() {
 
-    clicks = parseInt(getCookie("clicks"));
+    clicks = parseInt(getCookie("clicks")) - 1;
+
+    clickit();
 
     for(let i = 0; i < upgrades.length; i++) {
 
         upgrades[i].amount = parseInt(getCookie(upgrades[i].name));
+        upgrades[i].update();
 
     }
 
@@ -301,6 +303,9 @@ function tick() {
     let currentCPS = getCPS();
 
     if(currentCPS < 1 && currentCPS > 0) {
+        if(belowZeroInterval < 0) {
+            belowZeroInterval = 0;
+        }
         if(belowZeroInterval == 0) {
 
             belowZeroInterval = 1 / currentCPS;
