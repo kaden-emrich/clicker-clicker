@@ -113,7 +113,7 @@ class upgrade {
             clicks -= this.cost;
 
             this.amount++;
-            this.cost = Math.round(this.cost * 1.1);
+            this.cost = Math.round(this.cost * 1.2);
 
             this.costEl.innerHTML = "Cost: " + this.cost;
             this.amountEl.innerHTML = "(" + this.amount + ")";
@@ -139,6 +139,21 @@ class upgrade {
 
 /* Objects End */
 
+function getCPS() {
+
+    let temp = 0;
+    
+    if(upgrades != null) {
+        for(let i =0; i < upgrades.length; i++) {
+
+            temp += Math.round(10*upgrades[i].amount * upgrades[i].cps) / 10;
+
+        }
+    }
+
+    return temp;
+}
+
 
 function clickit() {
 
@@ -157,39 +172,41 @@ function update() {
 
     if(clicks >= 10 && upgrades.length == 0) {
 
-        var newUpgrade = new upgrade("Broken Mouse", 20, 0.5, "broken-mouse.PNG");
+        var newUpgrade = new upgrade("Broken Mouse", 15, 0.1, "broken-mouse.PNG");
         newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
         upgrades.push(newUpgrade);
 
     }
-    if(clicks >= 30 && upgrades.length == 1) {
+    if(clicks >= 18 && upgrades.length == 1) {
 
-        var newUpgrade = new upgrade("The World's Worst Auto-Clicker", 50, 1, "Auto-Clicker.png");
+        var newUpgrade = new upgrade("The World's Worst Auto-Clicker", 100, 1, "Auto-Clicker.png");
         newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
         upgrades.push(newUpgrade);
 
     }
-    if(clicks >= 50 && upgrades.length == 2) {
+    if(clicks >= 120 && upgrades.length == 2) {
 
-        var newUpgrade = new upgrade("V's Mouse", 100, 2, "placeholder.png");
+        var newUpgrade = new upgrade("V's Mouse", 1000, 8, "placeholder.png");
         newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
         upgrades.push(newUpgrade);
 
     }
-    if(clicks >= 100 && upgrades.length == 3) {
+    if(clicks >= 1200 && upgrades.length == 3) {
 
-        var newUpgrade = new upgrade("McLogemer", 200, 5, "McLogemer.JPG");
+        var newUpgrade = new upgrade("McLogemer", 5000, 16, "McLogemer.JPG");
         newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
         upgrades.push(newUpgrade);
 
     }
-    if(clicks >= 500 && upgrades.length == 4) {
+    if(clicks >= 600 && upgrades.length == 4) {
 
-        var newUpgrade = new upgrade("Logatec G503", 1000, 15, "logatec-G503.png");
+        var newUpgrade = new upgrade("Logatec G503", 10000, 64, "logatec-G503.png");
         newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
         upgrades.push(newUpgrade);
 
     }
+
+    cpsEl.innerHTML = getCPS();
 
 }
 
@@ -201,17 +218,103 @@ function giveClicks(num) {
     }
 }
 
-function tick() {
 
-    if(upgrades != null) {
-        for(let i = 0; i < upgrades.length; i++) {
+/* Other Functions Start */
 
-            upgrades[i].tick();
+function setCookie(cname, cvalue) {
+
+    document.cookie = cname + "=" + cvalue + ";path=/" + ";";
+
+} // setCookie()
+
+function getCookie(cname) {
+
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+
+    for(let i = 0; i <ca.length; i++) {
+
+        let c = ca[i];
+
+        while (c.charAt(0) == ' ') {
+
+            c = c.substring(1);
+        }
+
+        if (c.indexOf(name) == 0) {
+
+            return c.substring(name.length, c.length);
         }
     }
 
-    cpsEl.innerHTML = current - last;
-    last = current;
+    return "";
+} // getCookie()
+
+function getAllCookies() {
+
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+
+    return ca;
+}
+
+/* Other Functions End */
+
+/* Save/Load Functions Start */
+
+function saveGame() {
+
+    // Save the total clicks
+    setCookie("clicks", clicks);
+
+    // Save upgrades
+    if(upgrades != null){
+        for(let i = 0; i < upgrades.length; i++) {
+
+            setCookie(upgrades[i].name, upgrades[i].amount);
+
+        }
+    }
+}
+
+function loadGame() {
+
+    clicks = parseInt(getCookie("clicks"));
+
+    for(let i = 0; i < upgrades.length; i++) {
+
+        upgrades[i].amount = parseInt(getCookie(upgrades[i].name));
+
+    }
+
+    update();
+}
+
+/* Save/Load Functions End */
+
+
+var belowZeroInterval = 0;
+function tick() {
+
+    let currentCPS = getCPS();
+
+    if(currentCPS < 1 && currentCPS > 0) {
+        if(belowZeroInterval == 0) {
+
+            belowZeroInterval = 1 / currentCPS;
+
+            clicks += 1;
+            current +=1;
+        }
+        else {
+            belowZeroInterval--;
+        }
+    }
+    else {
+        clicks += Math.round(currentCPS);
+    }
 
     update();
 
