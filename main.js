@@ -280,14 +280,12 @@ function saveGame() {
 
 function loadGame() {
 
-    clicks = parseInt(getCookie("clicks")) - 1;
-
-    clickit();
-
     for(let i = 0; i < upgrades.length; i++) {
         
         if(getCookie("upgrade"+i) != '') {
+
             while(upgrades[i] == null) {
+
                 clickit();
             }
         }
