@@ -294,7 +294,7 @@ function loadGame() {
             }
         }
 
-        upgrades[i].amount = parseInt(getCookie(upgrades[i].name));
+        upgrades[i].amount = parseInt(getCookie("upgrade"+i));
         upgrades[i].update();
 
     }
