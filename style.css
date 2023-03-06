@@ -57,12 +57,19 @@ div.gameStateButton {
     /*border: 1px solid blue;*/
 }
 button.gameStateButton {
+    box-sizing: border-box;
     width: 180px;
+    height: 30px;
     margin: 5px;
     border: 2px solid grey;
     border-radius: 3px;
     font-size: 15px;
     font-weight: bold;
+}
+button.gameStateButton:active {
+    box-sizing: border-box;
+    background-color: lightgray;
+    border: 4px solid darkgray;
 }
 
 #middle {

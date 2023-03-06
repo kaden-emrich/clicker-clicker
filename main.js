@@ -55,6 +55,7 @@ class upgrade {
         // Set inst vars
         this.name = name;
         this.cost = cost;
+        this.baseCost = cost;
         this.cps = cps;
         this.img = img;
 
@@ -100,6 +101,14 @@ class upgrade {
     }
 
     update() {
+
+        this.cost = this.baseCost;
+
+        for(let i = 1; i <= this.amount; i++) {
+            
+            this.cost *= 1.2;
+            
+        }
 
         this.costEl.innerHTML = "Cost: " + this.cost;
         this.amountEl.innerHTML = "(" + this.amount + ")";
