@@ -106,8 +106,8 @@ class upgrade {
 
         for(let i = 1; i <= this.amount; i++) {
             
-            this.cost *= 1.2;
-            
+            this.cost = Math.round(this.cost * 1.2);
+
         }
 
         this.costEl.innerHTML = "Cost: " + this.cost;
