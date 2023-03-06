@@ -286,7 +286,7 @@ function loadGame() {
 
     for(let i = 0; i < upgrades.length; i++) {
         
-        if(getCookie(upgrades[i].name) != 0) {
+        if(getCookie(upgrades[i].name) != '') {
             while(upgrades[i] == null) {
                 clickit();
             }
