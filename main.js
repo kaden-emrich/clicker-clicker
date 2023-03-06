@@ -272,7 +272,7 @@ function saveGame() {
     if(upgrades != null){
         for(let i = 0; i < upgrades.length; i++) {
 
-            setCookie(upgrades[i].name, upgrades[i].amount);
+            setCookie("upgrade"+i, upgrades[i].amount);
 
         }
     }
@@ -286,7 +286,7 @@ function loadGame() {
 
     for(let i = 0; i < upgrades.length; i++) {
         
-        if(getCookie(upgrades[i].name) != '') {
+        if(getCookie("upgrade"+i) != '') {
             while(upgrades[i] == null) {
                 clickit();
             }
