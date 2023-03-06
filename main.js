@@ -276,11 +276,15 @@ function saveGame() {
 
         }
     }
+
+    setCookie("amountUpgrades", upgrades.length);
 }
 
 function loadGame() {
 
-    for(let i = 0; i < upgrades.length; i++) {
+    var numUpgrades = getCookie("amountUpgrades");
+
+    for(let i = 0; i < numUpgrades; i++) {
         
         if(getCookie("upgrade"+i) != '') {
 
