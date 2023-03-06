@@ -103,6 +103,23 @@ class upgrade {
 
         this.costEl.innerHTML = "Cost: " + this.cost;
         this.amountEl.innerHTML = "(" + this.amount + ")";
+        
+        while(this.buddyDiv.firstChild) {
+
+            this.buddyDiv.removeChild(this.buddyDiv.firstChild);
+
+        }
+
+        this.buddies = [];
+
+        for(let i = 0; i < this.amount; i++) {
+
+            let next = document.createElement("img");
+            next.className = "buddy";
+            next.src = this.img;
+            this.buddies.push(this.buddyDiv.appendChild(next));
+
+        }
 
     }
 
