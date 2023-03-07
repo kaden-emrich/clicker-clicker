@@ -18,7 +18,7 @@ body {
     width: 400px;
     height: 700px;
     margin: 0;
-    border: 1px solid gray;
+    /*border: 1px solid gray;*/
 }
 
 #cursor {
@@ -78,7 +78,7 @@ button.gameStateButton:active {
     left: 410px;
     width: 500px;
     height: 700px;
-    border: 1px solid grey;
+    /*border: 1px solid grey;*/
 }
 
 #buddies {
@@ -117,7 +117,7 @@ img.buddy {
     width: 500px;
     height: 700px;
     margin: 0;
-    border: 1px solid gray;
+    /*border: 1px solid gray;*/
 }
 
 .upgrade {

@@ -7,6 +7,12 @@ var current = 0;
 
 var clicks = 0;
 
+/* Settings Start */
+
+var ShowRealClicks = false; // If true, the clicks display will not round the number of clicks to a whole number
+
+/* Settings End */
+
 /* Objects Start */
 
 var counter = document.getElementById("counter");
@@ -58,6 +64,10 @@ class upgrade {
         this.baseCost = cost;
         this.cps = cps;
         this.img = img;
+
+    }
+
+    show() {
 
         // create upgrade div
         this.div = document.createElement("div");
@@ -194,40 +204,55 @@ function clickit() {
 
 function update() {
 
-    counter.innerHTML = clicks;
+    clicks = (Math.round(clicks * 10)) / 10;
+
+    if(ShowRealClicks)
+        counter.innerHTML = clicks;
+    else
+        counter.innerHTML = Math.round(clicks);
 
     if(clicks >= 10 && upgrades.length == 0) {
 
-        var newUpgrade = new upgrade("Broken Mouse", 15, 0.1, "broken-mouse.PNG");
+        let newUpgrade = new upgrade("Broken Mouse", 15, 0.1, "broken-mouse.PNG");
+        newUpgrade.show();
         newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
+        
         upgrades.push(newUpgrade);
 
     }
-    if(clicks >= 18 && upgrades.length == 1) {
+    if(clicks >= 20 && upgrades.length == 1) {
 
-        var newUpgrade = new upgrade("The World's Worst Auto-Clicker", 100, 1, "Auto-Clicker.png");
+        let newUpgrade = new upgrade("The World's Worst Auto-Clicker", 100, 1, "Auto-Clicker.png");
+        newUpgrade.show();
         newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
+        
         upgrades.push(newUpgrade);
 
     }
     if(clicks >= 120 && upgrades.length == 2) {
 
-        var newUpgrade = new upgrade("V's Mouse", 1000, 8, "placeholder.png");
+        let newUpgrade = new upgrade("V's Mouse", 1000, 8, "placeholder.png");
+        newUpgrade.show();
         newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
+        
         upgrades.push(newUpgrade);
 
     }
     if(clicks >= 1200 && upgrades.length == 3) {
 
-        var newUpgrade = new upgrade("McLogemer", 5000, 16, "McLogemer.JPG");
+        let newUpgrade = new upgrade("McLogemer", 5000, 16, "McLogemer.JPG");
+        newUpgrade.show();
         newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
+       
         upgrades.push(newUpgrade);
 
     }
     if(clicks >= 600 && upgrades.length == 4) {
 
-        var newUpgrade = new upgrade("Logatec G503", 10000, 64, "logatec-G503.png");
+        let newUpgrade = new upgrade("Logatec G503", 10000, 64, "logatec-G503.png");
+        newUpgrade.show();
         newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
+        
         upgrades.push(newUpgrade);
 
     }
@@ -334,30 +359,12 @@ function loadGame() {
 
 /* Save/Load Functions End */
 
-
-var belowZeroInterval = 0;
 function tick() {
 
     let currentCPS = getCPS();
 
-    if(currentCPS < 1 && currentCPS > 0) {
-        if(belowZeroInterval < 0) {
-            belowZeroInterval = 0;
-        }
-        if(belowZeroInterval == 0) {
-
-            belowZeroInterval = 1 / currentCPS;
-
-            clicks += 1;
-            current +=1;
-        }
-        else {
-            belowZeroInterval--;
-        }
-    }
-    else {
-        clicks += Math.round(currentCPS);
-    }
+    clicks += currentCPS
+    clicks = (Math.round(clicks * 10)) / 10;
 
     update();
 
