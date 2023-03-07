@@ -238,7 +238,7 @@ function update() {
         upgrades.push(newUpgrade);
 
     }
-    if(clicks >= 1200 && upgrades.length == 3) {
+    if(clicks >= 200 && upgrades.length == 3) {
 
         let newUpgrade = new upgrade("McLogemer", 5000, 16, "McLogemer.JPG");
         newUpgrade.show();
@@ -247,7 +247,7 @@ function update() {
         upgrades.push(newUpgrade);
 
     }
-    if(clicks >= 600 && upgrades.length == 4) {
+    if(clicks >= 5000 && upgrades.length == 4) {
 
         let newUpgrade = new upgrade("Logatec G503", 10000, 64, "logatec-G503.png");
         newUpgrade.show();
