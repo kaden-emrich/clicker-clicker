@@ -85,7 +85,7 @@ button.gameStateButton:active {
     position: relative;
     box-sizing: border-box;
     width: 500px;
-    height: 500px;
+    height: 700px;
     border: 1px solid grey;
     overflow-y: scroll;
     overflow-x: hidden;

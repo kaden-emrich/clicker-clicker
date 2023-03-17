@@ -163,6 +163,10 @@ class upgrade {
 
             console.log("buying a " + this.name + ".");
         }
+        else {
+            this.button.innerHTML = "LMAO U Broke.";
+            setTimeout(() => {this.button.innerHTML = "BUY"}, 1000);
+        }
     }
 
     tick() {
@@ -213,7 +217,7 @@ function update() {
 
     if(clicks >= 10 && upgrades.length == 0) {
 
-        let newUpgrade = new upgrade("Broken Mouse", 15, 0.1, "broken-mouse.PNG");
+        let newUpgrade = new upgrade("Broken Mouse", 15, 0.1, "icons/broken-mouse.PNG");
         newUpgrade.show();
         newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
         
@@ -222,34 +226,88 @@ function update() {
     }
     if(clicks >= 20 && upgrades.length == 1) {
 
-        let newUpgrade = new upgrade("The World's Worst Auto-Clicker", 100, 1, "Auto-Clicker.png");
+        let newUpgrade = new upgrade("The World's Worst Auto-Clicker", 100, 1, "icons/Auto-Clicker.png");
         newUpgrade.show();
         newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
         
         upgrades.push(newUpgrade);
 
     }
-    if(clicks >= 120 && upgrades.length == 2) {
+    if(clicks >= 200 && upgrades.length == 2) {
 
-        let newUpgrade = new upgrade("V's Mouse", 1000, 8, "placeholder.png");
+        let newUpgrade = new upgrade("V's Mouse", 500, 8, "icons/mouse.jfif");
         newUpgrade.show();
         newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
         
         upgrades.push(newUpgrade);
 
     }
-    if(clicks >= 200 && upgrades.length == 3) {
+    if(clicks >= 700 && upgrades.length == 3) {
 
-        let newUpgrade = new upgrade("McLogemer", 5000, 16, "McLogemer.JPG");
+        let newUpgrade = new upgrade("McLogemer", 1000, 16, "icons/McLogemer.JPG");
         newUpgrade.show();
         newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
        
         upgrades.push(newUpgrade);
 
     }
-    if(clicks >= 5000 && upgrades.length == 4) {
+    if(clicks >= 1500 && upgrades.length == 4) {
 
-        let newUpgrade = new upgrade("Logatec G503", 10000, 64, "logatec-G503.png");
+        let newUpgrade = new upgrade("Logatec G503", 2000, 32, "icons/logatec-G503.png");
+        newUpgrade.show();
+        newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
+        
+        upgrades.push(newUpgrade);
+
+    }
+    if(clicks >= 3000 && upgrades.length == 5) {
+        
+        let newUpgrade = new upgrade("Erm Actualy...", 5000, 64, "icons/nerd.JPG");
+        newUpgrade.show();
+        newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
+        
+        upgrades.push(newUpgrade);
+
+    }
+    if(clicks > 8000 && upgrades.length == 6) {
+
+        let newUpgrade = new upgrade("\"Good Switch\"", 10000, 128, "icons/cherrymxbrowns.jpg");
+        newUpgrade.show();
+        newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
+        
+        upgrades.push(newUpgrade);
+
+    }
+    if(clicks > 12000 && upgrades.length == 7) {
+
+        let newUpgrade = new upgrade("Gaming Fridge", 15000, 256, "icons/gamingfridge.jfif");
+        newUpgrade.show();
+        newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
+        
+        upgrades.push(newUpgrade);
+
+    }
+    if(clicks > 20000 && upgrades.length == 8) {
+
+        let newUpgrade = new upgrade("\"NOT Cheating\"", 30000, 512, "icons/OpenAILogo.png");
+        newUpgrade.show();
+        newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
+        
+        upgrades.push(newUpgrade);
+
+    }
+    if(clicks > 40000 && upgrades.length == 9) {
+
+        let newUpgrade = new upgrade("I am out of ideas", 50000, 1024, "placeholder.png");
+        newUpgrade.show();
+        newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
+        
+        upgrades.push(newUpgrade);
+
+    }
+    if(clicks > 80000 && upgrades.length == 10) {
+
+        let newUpgrade = new upgrade("The Greatest", 100000, 2048, "icons/thebester.jpg");
         newUpgrade.show();
         newUpgrade.button.addEventListener("click", function() {newUpgrade.buy();});
         
@@ -267,14 +325,14 @@ function giveClicks(num) {
 
         clickit();
     }
-}
+}// giveClicks(num)
 
 
 /* Other Functions Start */
 
 function setCookie(cname, cvalue) {
 
-    document.cookie = cname + "=" + cvalue + ";path=/" + ";";
+    document.cookie = cname + "=" + cvalue + ";path=/" + "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
 
 } // setCookie()
 
@@ -364,7 +422,7 @@ function tick() {
     let currentCPS = getCPS();
 
     clicks += currentCPS
-    clicks = (Math.round(clicks * 10)) / 10;
+    clicks = (Math.floor(clicks * 10)) / 10;
 
     update();
 
